@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-messaging.js"></script>
+  </head>
+  <style>
+    div {
+      margin-bottom: 15px;
+    }
+  </style>
+  <body>
+    Test Push Notifications
+    <br />
+    <div id="token"></div>
+    <div id="msg"></div>
+    <div id="notis"></div>
+    <div id="err"></div>
+    <button>Allo Push Notifications</button>
+    <script>
+      MsgElem = document.getElementById('msg');
+      TokenElem = document.getElementById('token');
+      NotisElem = document.getElementById('notis');
+      ErrElem = document.getElementById('err');
+      // Initialize Firebase
+      // TODO: Replace with your project's customized code snippet
+      var config = {
+        apiKey: 'AIzaSyAuRduOKK2DnRjow0AEOVXxT13xDkK8Vto',
+        authDomain: 'angular-pwa-push.firebaseapp.com',
+        databaseURL: 'https://angular-pwa-push.firebaseio.com',
+        projectId: 'angular-pwa-push',
+        storageBucket: 'angular-pwa-push.appspot.com',
+        messagingSenderId: '937961744284',
+        appId: '1:937961744284:web:8f37e23063da28e7750a59',
+        measurementId: 'G-9T7FT0GCYZ'
+      };
+      firebase.initializeApp(config);
+      const messaging = firebase.messaging();
+      messaging
+        .requestPermission()
+        .then(() => {
+          MsgElem.innerHTML = 'Notification permission granted.';
+          console.log('Notification permission granted.');
+
+          // get the token in the form of promise
+          return messaging.getToken();
+        })
+        .then(token => {
+          TokenElem.innerHTML = 'token is : ' + token;
+        })
+        .catch(err => {
+          ErrElem.innerHTML = ErrElem.innerHTML + '; ' + err;
+          console.log('Unable to get permission to notify.', err);
+        });
+
+      messaging.onMessage(function(payload) {
+        console.log('Message received. ', payload);
+        NotisElem.innerHTML = NotisElem.innerHTML + JSON.stringify(payload);
+        //kenng - foreground notifications
+        const { title, ...options } = payload.notification;
+        navigator.serviceWorker.ready.then(registration => {
+          registration.showNotification(title, options);
+        });
+      });
+    </script>
+  </body>
+</html>
