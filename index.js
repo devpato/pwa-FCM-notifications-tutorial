@@ -4,14 +4,14 @@ ErrElem = document.getElementById("err");
 // Initialize Firebase
 // TODO: Replace with your project's customized code snippet
 const config = {
-  apiKey: "AIzaSyAuRduOKK2DnRjow0AEOVXxT13xDkK8Vto",
-  authDomain: "angular-pwa-push.firebaseapp.com",
-  databaseURL: "https://angular-pwa-push.firebaseio.com",
-  projectId: "angular-pwa-push",
-  storageBucket: "angular-pwa-push.appspot.com",
-  messagingSenderId: "937961744284",
-  appId: "1:937961744284:web:8f37e23063da28e7750a59",
-  measurementId: "G-9T7FT0GCYZ"
+  apiKey: "XXXXXXXXXXXXXXX",
+  authDomain: "XXXXXXXXXXXXXXX",
+  databaseURL: "XXXXXXXXXXXXXXX",
+  projectId: "XXXXXXXXXXXXXXX",
+  storageBucket: "XXXXXXXXXXXXXXX",
+  messagingSenderId: "XXXXXXXXXXXXXXX",
+  appId: "XXXXXXXXXXXXXXX",
+  measurementId: "XXXXXXXXXXXXXXX"
 };
 firebase.initializeApp(config);
 const messaging = firebase.messaging();
