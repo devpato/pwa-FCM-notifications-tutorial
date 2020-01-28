@@ -19,14 +19,10 @@ messaging
   .requestPermission()
   .then(() => {
     MsgElem.innerHTML = "Notification permission granted.";
-    console.log("Notification permission granted.");
-
-    // get the token in the form of promise
     return messaging.getToken();
   })
   .then(token => {
     TokenElem.innerHTML = "Token Is : " + token;
-    //console.log('subscribe...');
     subscribeTokenToTopic(token, "allUsers");
   })
   .catch(err => {
