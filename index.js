@@ -1,6 +1,5 @@
 MsgElem = document.getElementById("msg");
 TokenElem = document.getElementById("token");
-NotisElem = document.getElementById("notis");
 ErrElem = document.getElementById("err");
 // Initialize Firebase
 // TODO: Replace with your project's customized code snippet
@@ -28,7 +27,7 @@ messaging
   .then(token => {
     TokenElem.innerHTML = "Token Is : " + token;
     //console.log('subscribe...');
-    //subscribeTokenToTopic(token, "allUsers");
+    subscribeTokenToTopic(token, "allUsers");
   })
   .catch(err => {
     ErrElem.innerHTML = ErrElem.innerHTML + "; " + err;
