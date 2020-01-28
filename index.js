@@ -1,6 +1,5 @@
-MsgElem = document.getElementById("msg");
-TokenElem = document.getElementById("token");
-ErrElem = document.getElementById("err");
+const tokenString = document.getElementById("token");
+const errorMessage = document.getElementById("err");
 // Initialize Firebase
 // TODO: Replace with your project's customized code snippet
 const config = {
@@ -13,20 +12,23 @@ const config = {
   appId: "XXXXXXXXXXXXXXX",
   measurementId: "XXXXXXXXXXXXXXX"
 };
+
 firebase.initializeApp(config);
+
 const messaging = firebase.messaging();
+
 messaging
   .requestPermission()
   .then(() => {
-    MsgElem.innerHTML = "Notification permission granted.";
+    MsgElem.innerHTML = "Notifications allowed.";
     return messaging.getToken();
   })
   .then(token => {
-    TokenElem.innerHTML = "Token Is : " + token;
-    subscribeTokenToTopic(token, "allUsers");
+    tokenString.innerHTML = "Token Is : " + token;
+    //subscribeTokenToTopic(token, "allUsers");
   })
   .catch(err => {
-    ErrElem.innerHTML = ErrElem.innerHTML + "; " + err;
+    errorMessage.innerHTML = errorMessage.innerHTML + "; " + err;
     console.log("Unable to get permission to notify.", err);
   });
 
@@ -49,8 +51,9 @@ function subscribeTokenToTopic(token, topic) {
           response.status +
           " - " +
           response.text();
+      } else {
+        console.log('Subscribed to "' + topic + '"');
       }
-      console.log('Subscribed to "' + topic + '"');
     })
     .catch(error => {
       console.error(error);
