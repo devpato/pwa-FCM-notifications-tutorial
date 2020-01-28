@@ -1,3 +1,3 @@
-const message = document.getElementById("msg");
-const tokenMessage = document.getElementById("token");
-const errMessage = document.getElementById("err");
+const tokenString = document.getElementById("token");
+const errorMessage = document.getElementById("error");
+const message = document.getElementById("message");
